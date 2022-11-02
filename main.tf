@@ -143,7 +143,7 @@ resource "aws_iam_user" "users" {
   permissions_boundary = each.value.permissions_boundary
 
   tags = merge(
-    map("Name", lookup(each.value, "name")),
+    tomap({ "Name" = lookup(each.value, "name") }),
     var.tags
   )
 }
@@ -243,7 +243,7 @@ resource "aws_iam_role" "roles" {
   force_detach_policies = var.role_force_detach_policies
 
   tags = merge(
-    map("Name", lookup(each.value, "name")),
+    tomap({ "Name" = lookup(each.value, "name") }),
     var.tags
   )
 }
